@@ -15,5 +15,11 @@ public class OrderEventConsumer {
         Long orderId = (Long)orderEvent.get("orderId");
         String status = (String)orderEvent.get("status");
         System.out.println("Received order event with orderId: " + orderId + ", status: " + status);
+
+        // Update Database
+        // Send Notification
+        // Send Emails
+        // Generate Invoice
+        // Send Seller Notification
     }
 }

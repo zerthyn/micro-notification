@@ -1,19 +1,19 @@
 package org.rhydo.micronotification.consumers;
 
+import org.rhydo.micronotification.dtos.OrderCreatedEvent;
+import org.rhydo.micronotification.dtos.OrderStatus;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Service
 public class OrderEventConsumer {
 
     @RabbitListener(queues = "${rabbitmq.queue.name}")
-    public void handleOrderEvent(Map<String, Object> orderEvent) {
+    public void handleOrderEvent(OrderCreatedEvent orderEvent) {
         System.out.println("Received order event: " + orderEvent);
 
-        Long orderId = (Long)orderEvent.get("orderId");
-        String status = (String)orderEvent.get("status");
+        Long orderId = orderEvent.getOrderId();
+        OrderStatus status = orderEvent.getStatus();
         System.out.println("Received order event with orderId: " + orderId + ", status: " + status);
 
         // Update Database
